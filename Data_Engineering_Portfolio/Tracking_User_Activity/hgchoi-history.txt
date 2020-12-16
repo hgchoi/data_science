@@ -1,0 +1,1000 @@
+  438  docker pull midsw205/spark-python:0.0.5
+  439  docker pull midsw205/spark-python:0.0.6
+  440  docker pull midsw205/cdh-minimal:latest
+  441  docker pull midsw205/hadoop:0.0.2
+  442  docker pull midsw205/presto:0.0.1
+  443  mkdir ~/w205/spark-with-kafka-and-hdfs
+  444  cd ~/w205/spark-with-kafka-and-hdfs
+  445  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml .
+  446  ls -lh
+  447  cd ~/w205
+  448  curl -L -o players.json https://goo.gl/vsuCpZ
+  449  cd ~/w205/spark-with-kafka-and-hdfs
+  450  ls -lh
+  451  cd ~/w205
+  452  ls -lh
+  453  cd ~/w205/spark-with-kafka-and-hdfs
+  454  docker-compose up -d
+  455  docker-compose logs -f kafka
+  456  cd ~/w205/spark-with-kafka-and-hdfs
+  457  docker-compose exec cloudera hadoop fs -ls /tmp/
+  458  docker-compose exec kafka kafka-topics --create --topic players --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  459  docker-compose exec mids bash -c "cat /w205/players.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t players"
+  460  docker-compose exec spark pyspark
+  461  clear
+  462  docker ps -a
+  463  docker-compose down
+  464  cd ~/w205/spark-with-kafka-and-hdfs
+  465  docker-compose exec kafka kafka-topics --create --topic players --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  466  docker-compose exec mids bash -c "cat /w205/players.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t players"
+  467  cd ..
+  468  head -30 players.json
+  469  docker-compose exec cloudera hadoop fs -ls /tmp/
+  470  cd spark-with-kafka-and-hdfs/
+  471  docker-compose exec cloudera hadoop fs -ls /tmp/
+  472  docker-compose exec cloudera hadoop fs -ls /tmp/players/
+  473  clear
+  474  docker-compose exec cloudera hadoop fs -ls /tmp/
+  475  docker-compose exec cloudera hadoop fs -ls /tmp/extracted_players/
+  476  docker-compose exec kafka kafka-topics --create --topic commits --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  477  cd ~/w205
+  478  curl -L -o github-example-large.json https://goo.gl/Y4MD58
+  479  cd ~/w205/spark-with-kafka-and-hdfs
+  480  cd ~/w205
+  481  ls -lh
+  482  cd ~/w205/spark-with-kafka-and-hdfs
+  483  docker-compose exec mids bash -c "cat /w205/github-example-large.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t commits"
+  484  docker-compose exec spark pyspark
+  485  clear
+  486  sudo chown -R jupyter:jupyter ~/w205
+  487  cd ~/w205/course-content
+  488  git pull --all
+  489  docker ps -a
+  490  docker network ls
+  491  docker network prune
+  492  docker pull midsw205/base:latest
+  493  docker pull midsw205/base:0.1.8
+  494  docker pull midsw205/base:0.1.9
+  495  docker pull redis
+  496  docker pull confluentinc/cp-zookeeper:latest
+  497  docker pull confluentinc/cp-kafka:latest
+  498  docker pull midsw205/spark-python:0.0.5
+  499  docker pull midsw205/spark-python:0.0.6
+  500  docker pull midsw205/cdh-minimal:latest
+  501  docker pull midsw205/hadoop:0.0.2
+  502  docker pull midsw205/presto:0.0.1
+  503  docker-compose ps
+  504  cd ..
+  505  ls -lh
+  506  cd- project-2-hgchoi
+  507  cd project-2-hgchoi
+  508  git status
+  509  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+  510  cp ~/w205/course-content/07-Sourcing-Data/docker-compose.yml .
+  511  cp ~/w205/course-content/07-Sourcing-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  512  cp ~/w205/course-content/06-Transforming-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  513  docker-compose up -d
+  514  docker-compose ps
+  515  docker ps -a 
+  516  docker-compose logs -f kafka
+  517  cd ~/w205
+  518  cd project-2-hgchoi
+  519  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+  520  docker-compose down
+  521  docker-compose up -d
+  522  docker-compose ps
+  523  docker ps -a
+  524  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+  525  cp ~/w205/course-content/07-Sourcing-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  526  vi docker-compose.yml
+  527  docker-compose up -d
+  528  docker-compose ps
+  529  docker ps -a 
+  530  docker-compose logs -f kafka
+  531  docker-compose exec kafka kafka-topics --create --topic assessments partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  532  cd ~/w205
+  533  cd project-2-hgchoi
+  534  docker-compose exec kafka kafka-topics --create --topic assessments partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  535  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+  536  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments 
+  537  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+  538  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments 
+  539  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+  540  docker-compose exec kafka kafka-topics --create --topic assessments partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  541  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+  542  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments 
+  543  cd ~/w205 
+  544  cd project-2-hgchoi
+  545  docker-compose exec kafka kafka-topics --create --topic assessments partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  546  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+  547  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments 
+  548  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+  549  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments
+  550  sudo chown -R jupyter:jupyter ~/w205
+  551  cd ~/w205/course-content
+  552  git pull --all
+  553  docker ps -a
+  554  docker rm -f 9e5d650e0cb4
+  555  docker rm -f c3c4ee8a45c8
+  556  docker rm -f 261b0a8d283b
+  557  docker rm -f 863a68c7bb9b
+  558  docker ps -a
+  559  docker network ls
+  560  docker ps -a
+  561  docker network ls
+  562  docker pull midsw205/base:latest
+  563  docker pull midsw205/base:0.1.8
+  564  docker pull midsw205/base:0.1.9
+  565  docker pull redis
+  566  docker pull confluentinc/cp-zookeeper:latest
+  567  docker pull confluentinc/cp-kafka:latest
+  568  docker pull midsw205/spark-python:0.0.5
+  569  docker pull midsw205/spark-python:0.0.6
+  570  docker pull midsw205/cdh-minimal:latest
+  571  docker pull midsw205/hadoop:0.0.2
+  572  docker pull midsw205/presto:0.0.1
+  573  docker ps -a
+  574  cd ..
+  575  ls -lh
+  576  cd project-2-hgchoi
+  577  git status
+  578  ls -l
+  579  cp ~/w205/course-content/07-Sourcing-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  580  ls -lh
+  581  vi docker-compose.yml
+  582  docker-compose up -d
+  583  docker-compose ps
+  584  docker ps -a 
+  585  docker-compose logs -f kafka
+  586  cd ~/w205
+  587  cd project-2-hgchoi
+  588  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  589  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+  590  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json"
+  591  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.'"
+  592  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[]' -c"
+  593  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t foo && echo 'Produced 100 messages.'"
+  594  docker-compose exec kafka kafka-console-consumer --bootstrap-server kafka:29092 --topic foo --from-beginning --max-messages 42
+  595  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t foo -o beginning -e" | wc -l
+  596  docker-compose down
+  597  mkdir ~/w205/spark-with-kafka
+  598  cd ~/w205/spark-with-kafka
+  599  cp ~/w205/course-content/07-Sourcing-Data/docker-compose.yml .
+  600  docker-compose up -d
+  601  docker-compose logs -f kafka
+  602  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  603  cd ~/w205
+  604  cd project-2-hgchoi
+  605  cdocker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  606  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  607  cp ~/w205/course-content/07-Sourcing-Data/docker-compose.yml .
+  608  docker-compose up -d
+  609  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+  610  docker-compose logs -f kafka
+  611  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  612  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+  613  docker-compose exec kafka bash -c "seq 42 | kafka-console-producer --request-required-acks 1 --broker-list kafka:29092 --topic foo && echo 'Produced 42 messages.'"
+  614  docker-compose exec spark pyspark
+  615  docker-compose down
+  616  cd ~/w205
+  617  curl -L -o github-example-large.json https://goo.gl/Y4MD58
+  618  cd ~/w205/spark-with-kafka
+  619  docker-compose up -d
+  620  docker-compose logs -f kafka
+  621  mkdir ~/w205/kafka
+  622  cd ~/w205/kafka
+  623  cp ~/w205/course-content/06-Transforming-Data/docker-compose.yml ~/w205/kafka/
+  624  docker-compose up -d
+  625  docker-compose ps
+  626  docker-compose logs zookeeper | grep -i binding
+  627  docker-compose logs kafka | grep -i started
+  628  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  629  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+  630  docker-compose exec kafka bash -c "seq 42 | kafka-console-producer --request-required-acks 1 --broker-list localhost:29092 --topic foo && echo 'Produced 42 messages.'"
+  631  docker-compose exec kafka kafka-console-consumer --bootstrap-server localhost:29092 --topic foo --from-beginning --max-messages 42
+  632  docker-compose down
+  633  curl -L -o github-example-large.json https://goo.gl/Y4MD58
+  634  docker-compose up -d
+  635  docker-compose logs -f kafka
+  636  cd ~/w205
+  637  cd project-2-hgchoi
+  638  numbers = spark.read.format("kafka").option("kafka.bootstrap.servers", "kafka:29092").option("subscribe","foo").option("startingOffsets", "earliest").option("endingOffsets", "latest").load() 
+  639  cd ~/w205
+  640  cd project-2-hgchoi
+  641  docker-compose logs -f kafka
+  642  cd ~/w205
+  643  cd project-2-hgchoi
+  644  ls -l
+  645  cp ~/w205/course-content/06-Transforming-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  646  cp ~/w205/course-content/07-Sourcing-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  647  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  648  docker-compose up -d
+  649  docker-compose ps
+  650  docker ps -a 
+  651  docker-compose exec kafka kafka-topics --create --topic assessments partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  652  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+  653  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments
+  654  quit
+  655  exit
+  656  clear
+  657  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments
+  658  cd ~/w205
+  659  cd project-2-hgchoi
+  660  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  661  cd ~/w205
+  662  curl -L -o github-example-large.json https://goo.gl/Y4MD58
+  663  cd ~/w205/spark-with-kafka
+  664  docker-compose up -d
+  665  docker-compose logs -f kafka
+  666  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  667  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+  668  docker-compose exec mids bash -c "cat /w205/github-example-large.json"
+  669  docker-compose exec mids bash -c "cat /w205/github-example-large.json | jq '.'"
+  670  docker-compose exec mids bash -c "cat /w205/github-example-large.json | jq '.[]' -c"
+  671  docker-compose exec mids bash -c "cat /w205/github-example-large.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t foo && echo 'Produced 100 messages.'"
+  672  docker-compose exec spark pyspark
+  673  cd ~/w205
+  674  cd project-2-hgchoi
+  675  docker-compose logs -f kafk
+  676  docker-compose logs -f kafka
+  677  cd ~/w205
+  678  cd project-2-hgchoi
+  679  docker-compose logs -f kafka
+  680  docker-compose exec kafka kafka-topics --create --topic assessments partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  681  docker-compose logs -f kafka
+  682  ~/w205 
+  683  cd ~/w205
+  684  cd project-2-hgchoi
+  685  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+  686  cp ~/w205/course-content/06-Transforming-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  687  docker-compose up -d
+  688  docker-compose ps
+  689  docker ps -a 
+  690  docker-compose exec kafka kafka-topics --create --topic assessments partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  691  cd ~/w205
+  692  cd project-2-hgchoi
+  693  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+  694  cp ~/w205/course-content/06-Transforming-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  695  docker-compose up -d
+  696  docker-compose ps
+  697  docker ps -a
+  698  docker-compose exec kafka kafka-topics --create --topic assessments partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  699  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+  700  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments”
+  701  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+  702  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments”
+  703  quit
+  704  exit
+  705  sudo chown -R jupyter:jupyter ~/w205
+  706  cd ~/w205/course-content
+  707  git pull --all
+  708  cd
+  709  docker ps -a
+  710  docker rm -f 350b742744c5
+  711  docker rm -f 82afeae33e4c
+  712  docker rm -f c845c41d1c40
+  713  docker rm -f 6c42927b03c2
+  714  docker rm -f 9b4d83e57f4e
+  715  docker rm -f 8f86d117c570
+  716  docker rm -f 82dfa7dd5ba6
+  717  docker rm -f bdb3021f95fa
+  718  docker rm -f 44cbdf7a3ca2 jupyter@tensorflow-2-3-20200827-201450:~$ docker rm -f 44cbdf7a3ca2 
+  719  docker rm -f 44cbdf7a3ca2
+  720  docker rm -f a63769b90e31
+  721  docker rm -f fbd1611a06e7
+  722  docker rm -f 0cbe4cb11031
+  723  ps -a
+  724  docker ps =a
+  725  docker ps -a
+  726  docker network ls
+  727  docker network prune
+  728  docker network ls
+  729  docker pull midsw205/base:latest
+  730  docker pull midsw205/base:0.1.8
+  731  docker pull midsw205/base:0.1.9
+  732  docker pull redis
+  733  docker pull confluentinc/cp-zookeeper:latest
+  734  docker pull confluentinc/cp-kafka:latest
+  735  docker pull midsw205/spark-python:0.0.5
+  736  docker pull midsw205/spark-python:0.0.6
+  737  docker pull midsw205/cdh-minimal:latest
+  738  docker pull midsw205/hadoop:0.0.2
+  739  docker pull midsw205/presto:0.0.1
+  740  cd ~/w205
+  741  cd project-2-hgchoi
+  742  ls -l
+  743  vi docker-compose.yml
+  744  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+  745  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  746  vi docker-compose.yml
+  747  docker-compose down
+  748  vi docker-compose.yml
+  749  docker-compose up -d
+  750  vi docker-compose.yml
+  751  docker-compose exec spark bash
+  752  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+  753  docker-compose up -d
+  754  docker-compose exec spark bash
+  755  cd ~/w205
+  756  cd project-2-hgchoi
+  757  docker-compose exec spark bash
+  758  docker-compose up -d
+  759  docker-compose exec spark bash
+  760  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+  761  ~/w205
+  762  cd ~/w205
+  763  cd project-2-hgchoi
+  764  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp`
+  765  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+  766  cd ..
+  767  cd
+  768  sudo chown -R jupyter:jupyter ~/w205
+  769  cd ~/w205/course-content
+  770  git pull --all
+  771  docker ps -a
+  772  docker rm - d9cdc78ad023 
+  773  docker rm -f d9cdc78ad023 
+  774  docker rm -f d9cdc78ad023
+  775  docker rm -f e4d8456edb93
+  776  docker rm -f a728b1b93db0
+  777  docker rm -f 3c465fe64ab9
+  778  docker rm -f 749f3c54c216
+  779  docker ps -a
+  780  docker network ls
+  781  docker network prune
+  782  docker pull midsw205/base:latest
+  783  docker pull midsw205/base:0.1.8
+  784  docker pull midsw205/base:0.1.9
+  785  docker pull redis
+  786  docker pull confluentinc/cp-zookeeper:latest
+  787  docker pull confluentinc/cp-kafka:latest
+  788  docker pull midsw205/spark-python:0.0.5
+  789  docker pull midsw205/spark-python:0.0.6
+  790  docker pull midsw205/cdh-minimal:latest
+  791  docker pull midsw205/hadoop:0.0.2
+  792  docker pull midsw205/presto:0.0.1
+  793  cd ~/w205
+  794  docker-compose exec spark bash
+  795  cd project-2-hgchoi
+  796  docker-compose exec spark bash
+  797  docker-compose exec spark pyspark
+  798  docker-compose exec spark bash
+  799  mkdir ~/w205/spark-with-kafka
+  800  cd ~/w205/spark-with-kafka
+  801  cp ~/w205/course-content/07-Sourcing-Data/docker-compose.yml .
+  802  docker-compose up -d
+  803  docker-compose logs -f kafka
+  804  cd ~/w205
+  805  cd project-2-hgchoi
+  806  docker-compose logs -f kafka
+  807  sudo chown -R jupyter:jupyter ~/w205
+  808  cd ~/w205/course-content
+  809  git pull --all
+  810  docker ps -a
+  811  docker rm -f 99021cc399f1
+  812  docker rm -f dee97ee80867
+  813  docker rm -f 87e982f5a29c
+  814  docker rm -f 3a889ef5fb80
+  815  docker rm -f 76d2d33f8273
+  816  docker rm -f 1723332f2be9
+  817  docker rm -f f1a3d2b03329
+  818  docker rm -f e580cd1b8700
+  819  docker rm -f 8cbaf56ea8a4
+  820  docker ps -a 
+  821  docker network ls
+  822  docker network prune
+  823  docker pull midsw205/base:latest
+  824  docker pull midsw205/base:0.1.8
+  825  docker pull midsw205/base:0.1.9
+  826  docker pull redis
+  827  docker pull confluentinc/cp-zookeeper:latest
+  828  docker pull confluentinc/cp-kafka:latest
+  829  docker pull midsw205/spark-python:0.0.5
+  830  docker pull midsw205/spark-python:0.0.6
+  831  docker pull midsw205/cdh-minimal:latest
+  832  docker pull midsw205/hadoop:0.0.2
+  833  docker pull midsw205/presto:0.0.1
+  834  cd ..
+  835  cd project-2-hgchoi
+  836  docker-compose up -d
+  837  docker-compose ps
+  838  docker ps -a
+  839  docker-compose exec kafka kafka-topics --create --topic assessments partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  840  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+  841  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments”
+  842  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+  843  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments”
+  844  cd ~/w205
+  845  cd project-2-hgchoi
+  846  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+  847  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  848  docker-compose up -d
+  849  docker-compose ps
+  850  docker ps -a 
+  851  cd ..
+  852  sudo chown -R jupyter:jupyter ~/w205
+  853  cd ~/w205/course-content
+  854  git pull --all
+  855  docker ps -a
+  856  docker rm -f 467270b71e22
+  857  docker rm -f 5de3f894d7d5
+  858  docker rm -f b87226e60201
+  859  docker rm -f e0c55d735569
+  860  docker rm -f 6286d917fd1b
+  861  docker ps -a
+  862  docker network ls
+  863  docker network prune
+  864  docker pull midsw205/base:latest
+  865  docker pull midsw205/base:0.1.8
+  866  docker pull midsw205/base:0.1.9
+  867  docker pull redis
+  868  docker pull confluentinc/cp-zookeeper:latest
+  869  docker pull confluentinc/cp-kafka:latest
+  870  docker pull midsw205/spark-python:0.0.5
+  871  docker pull midsw205/spark-python:0.0.6
+  872  docker pull midsw205/cdh-minimal:latest
+  873  docker pull midsw205/hadoop:0.0.2
+  874  docker pull midsw205/presto:0.0.1
+  875  cd ..
+  876  cd project-2-hgchoi
+  877  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+  878  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  879  docker-compose up -d
+  880  docker-compose ps
+  881  docker ps -a 
+  882  docker-compose exec kafka kafka-topics --create --topic assessments partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  883  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+  884  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments” 
+  885  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+  886  docker-compose down
+  887  docker-compose up -d
+  888  docker-compose ps
+  889  docker ps -a
+  890  docker-compose exec spark bash
+  891  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+  892  docker-compose logs -f kafka
+  893  cd ~/w205
+  894  cd project-2-hgchoi
+  895  docker-compose logs -f kafka
+  896  cd ~/w205
+  897  cd project-2-hgchoi
+  898  docker-compose exec spark pyspark
+  899  cd ~/w205
+  900  cd project-2-hgchoi
+  901  cd .
+  902  cd ..
+  903  sudo chown -R jupyter:jupyter ~/w205
+  904  cd ~/w205/course-content
+  905  git pull --all
+  906  cd ~/w205/course-content
+  907  git pull --all
+  908  docker ps -a
+  909  docker rm -f ce9f153ac161 
+  910  docker rm -f 5460a24768aa 
+  911  docker rm -f 3f4fc4f51c52
+  912  docker rm -f a7e867fee3e7
+  913  docker rm -f 26a766dad21f 
+  914  docker ps -a
+  915  docker network ls
+  916  docker network prune
+  917  docker pull midsw205/base:latest
+  918  docker pull midsw205/base:0.1.8
+  919  docker pull midsw205/base:0.1.9
+  920  docker pull redis
+  921  docker pull confluentinc/cp-zookeeper:latest
+  922  docker pull confluentinc/cp-kafka:latest
+  923  docker pull midsw205/spark-python:0.0.5
+  924  docker pull midsw205/spark-python:0.0.6
+  925  docker pull midsw205/cdh-minimal:latest
+  926  docker pull midsw205/hadoop:0.0.2
+  927  docker pull midsw205/presto:0.0.1
+  928  docker compose up -d
+  929  cd ..
+  930  cd project-2-hgchoi
+  931  pip install pyspark
+  932  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+  933  docker ps -a
+  934  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  935  docker-compose up -d
+  936  docker-compose ps
+  937  docker ps -a 
+  938  docker-compose up -d
+  939  docker-compose exec spark bash
+  940  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+  941  cd ~/w205 
+  942  cd project-2-hgchoi
+  943  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+  944  docker-compose up -d
+  945  docker-compose ps
+  946  docker ps -a 
+  947  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  948  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+  949  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments” 
+  950  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+  951  ~/w205
+  952  cd ~/w205
+  953  cd project-2-hgchoi
+  954  docker-compose logs -f kafka
+  955  docker-compose up -d
+  956  docker-compose logs -f kafka
+  957  cd ~/w205/flask-with-kafka
+  958  docker-compose exec mids curl http://localhost:5000/
+  959  docker-compose exec mids curl http://localhost:5000/purchase_a_sword
+  960  cp ~/w205/course-content/09-Ingesting-Data/game_api.py .
+  961  docker-compose exec mids env FLASK_APP=/w205/flask-with-kafka/game_api.py flask run
+  962  docker-compose exec mids curl http://localhost:5000/
+  963  docker-compose exec mids curl http://localhost:5000/purchase_a_sword
+  964  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t events -o beginning -e"
+  965  docker-compose down
+  966  sudo chown -R jupyter:jupyter ~/w205
+  967  cd ~/w205/course-content
+  968  git pull --all
+  969  docker ps -a
+  970  docker rm -f 5d00edf3a6ab
+  971  docker rm -f 16c542724068
+  972  docker rm -f fe4288df5e31 
+  973  docker rm -f c36f290bdd57
+  974  docker rm -f 97779af67243 
+  975  docker ps -a
+  976  docker network ls
+  977  docker network prune
+  978  docker pull midsw205/base:latest
+  979  docker pull midsw205/base:0.1.8
+  980  docker pull midsw205/base:0.1.9
+  981  docker pull redis
+  982  docker pull confluentinc/cp-zookeeper:latest
+  983  docker pull confluentinc/cp-kafka:latest
+  984  docker pull midsw205/spark-python:0.0.5
+  985  docker pull midsw205/spark-python:0.0.6
+  986  docker pull midsw205/cdh-minimal:latest
+  987  docker pull midsw205/hadoop:0.0.2
+  988  docker pull midsw205/presto:0.0.1
+  989  sudo apt-get install telnet
+  990  telnet google.com 80
+  991  et_0.17-41_amd64.deb ...
+  992  telnet google.com 80
+  993  GET / HTTP/1.0
+  994  telnet google.com 80
+  995  GET / HTTP/1.1
+  996  telnet google.com 80
+  997  telnet httpbin.org 80
+  998  openssl s_client -connect google.com:443
+  999  openssl s_client -connect api.wheretheiss.at:443
+ 1000  echo | openssl s_client -connect google.com:443 2>&1 | sed --quiet '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > google.com.1.crt
+ 1001  cat google.com.1.crt
+ 1002  openssl x509 -in google.com.1.crt -noout -text
+ 1003  mkdir ~/w205/flask-with-kafka
+ 1004  cd ~/w205/flask-with-kafka
+ 1005  cp ~/w205/course-content/09-Ingesting-Data/docker-compose.yml .
+ 1006  docker-compose up -d
+ 1007  docker-compose exec kafka kafka-topics --create --topic events --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1008  cp ~/w205/course-content/09-Ingesting-Data/basic_game_api.py .
+ 1009  docker-compose exec mids env FLASK_APP=/w205/flask-with-kafka/basic_game_api.py flask run
+ 1010  cd ~/w205/flask-with-kafka
+ 1011  cd ~/w205
+ 1012  cd project-2-hgchoi
+ 1013  docker ps
+ 1014  docker ps -a
+ 1015  sudo chown -R jupyter:jupyter ~/w205
+ 1016  cd ~/w205/course-content
+ 1017  git pull --all
+ 1018  cd
+ 1019  docker ps -a
+ 1020  docker network ls
+ 1021  docker network prune
+ 1022  docker pull midsw205/base:latest
+ 1023  docker pull midsw205/base:0.1.8
+ 1024  docker pull midsw205/base:0.1.9
+ 1025  docker pull redis
+ 1026  docker pull confluentinc/cp-zookeeper:latest
+ 1027  docker pull confluentinc/cp-kafka:latest
+ 1028  docker pull midsw205/spark-python:0.0.5
+ 1029  docker pull midsw205/spark-python:0.0.6
+ 1030  docker pull midsw205/cdh-minimal:latest
+ 1031  docker pull midsw205/hadoop:0.0.2
+ 1032  docker pull midsw205/presto:0.0.1
+ 1033  cd ~/w205
+ 1034  cd project-2-hgchoi
+ 1035  docker ps -a
+ 1036  docker network ls
+ 1037  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+ 1038  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+ 1039  vi docker-compose.yml
+ 1040  docker-compose down
+ 1041  cp ~/w205/course-content/08-Querying-Data/docker-co
+ 1042  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+ 1043  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+ 1044  docker-compose down
+ 1045  vi docker-compose.yml
+ 1046  docker-compose up -d
+ 1047  vi docker-compose yml
+ 1048  vi docker-compose.yml
+ 1049  docker-compose exec spark bash
+ 1050  exit
+ 1051  cd ~/w205
+ 1052  cd project-2-hgchoi
+ 1053  docker ps -a 
+ 1054  vi docker-compose.yml
+ 1055  docker-compose up -d
+ 1056  docker-compose ps
+ 1057  docker ps -a
+ 1058  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1059  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+ 1060  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments”
+ 1061  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+ 1062  docker-compose exec spark pyspark
+ 1063  cd ~/w205 
+ 1064  cd project-2-hgchoi
+ 1065  docker ps -a
+ 1066  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+ 1067  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+ 1068  vi docker-compose.yml
+ 1069  docker-compose down
+ 1070  docker-compose.yml
+ 1071  vi docker-compose.yml
+ 1072  docker-compose up -d
+ 1073  vi docker-compose.yml
+ 1074  docker-compose exec spark bash
+ 1075  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+ 1076  cd ~/w205
+ 1077  cd project-2-hgchoi
+ 1078  docker-compose logs -f kafka
+ 1079  cd ~/w205
+ 1080  cd project-2-hgchoi
+ 1081  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+ 1082  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+ 1083  docker-compose down
+ 1084  vi docker-compose.yml
+ 1085  docker-compose up
+ 1086  docker compose up -d
+ 1087  vi docker-compose.yml
+ 1088  docker-compose exec spark bash
+ 1089  cd ~/w205
+ 1090  cd project-2-hgchoi
+ 1091  docker-compose exec spark pyspark
+ 1092  cd ~/w205
+ 1093  cd project-2-hgchoi
+ 1094  docker-compose logs -f kafka
+ 1095  sudo chown -R jupyter:jupyter ~/w205
+ 1096  cd ~/w205/course-content
+ 1097  git pull --all
+ 1098  sudo chown -R jupyter:jupyter ~/w205
+ 1099  git pull --all
+ 1100  docker ps -a
+ 1101  docker rm -f 54c54341e9ee
+ 1102  docker rm -f 6b7480bd9c9c
+ 1103  docker rm -f 56803516282f
+ 1104  docker rm -f c0c6ab064b72
+ 1105  docker rm -f e2549df32373
+ 1106  docker ps =a
+ 1107  docker ps -a
+ 1108  docker network ls
+ 1109  docker network prune
+ 1110  docker pull midsw205/base:latest
+ 1111  docker pull midsw205/base:0.1.8
+ 1112  docker pull midsw205/base:0.1.9
+ 1113  docker pull redis
+ 1114  docker pull confluentinc/cp-zookeeper:latest
+ 1115  docker pull confluentinc/cp-kafka:latest
+ 1116  docker pull midsw205/spark-python:0.0.5
+ 1117  docker pull midsw205/spark-python:0.0.6
+ 1118  docker pull midsw205/cdh-minimal:latest
+ 1119  docker pull midsw205/hadoop:0.0.2
+ 1120  docker pull midsw205/presto:0.0.1
+ 1121  cd ~/w205
+ 1122  ls -l
+ 1123  cd project-2-hgchoi
+ 1124  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+ 1125  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+ 1126  docker-compose up -d
+ 1127  docker-compose ps
+ 1128  docker ps -a
+ 1129  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+ 1130  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1131  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+ 1132  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments”
+ 1133  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-201801280121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments && echo 'Produced 100 messages.'"
+ 1134  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+ 1135  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+ 1136  vi docker-compose.yml
+ 1137  docker-compose up -d
+ 1138  docker-compose ps
+ 1139  docker-compose ps -a
+ 1140  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1141  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+ 1142  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-201801280121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments && echo 'Produced 100 messages.'"
+ 1143  cd ~/w205/spark-with-kafka
+ 1144  docker-compose exec spark pyspark
+ 1145  docker-compose down
+ 1146  cd ~/w205
+ 1147  curl -L -o github-example-large.json https://goo.gl/Y4MD58
+ 1148  cd ~/w205/spark-with-kafka
+ 1149  docker-compose up -d
+ 1150  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1151  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+ 1152  docker-compose exec mids bash -c "cat /w205/github-example-large.json"
+ 1153  docker-compose exec mids bash -c "cat /w205/github-example-large.json | jq '.[]' -c"
+ 1154  docker-compose exec mids bash -c "cat /w205/github-example-large.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t foo && echo 'Produced 100 messages.'"
+ 1155  docker-compose exec spark pyspark
+ 1156  docker-compose down
+ 1157  cd ..
+ 1158  mkdir ~/w205/spark-with-kafka-and-hdfs
+ 1159  cd ~/w205
+ 1160  mkdir ~/w205/spark-with-kafka-and-hdfs
+ 1161  cd ~/w205/spark-with-kafka-and-hdfs
+ 1162  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml .
+ 1163  cd ~/w205
+ 1164  curl -L -o players.json https://goo.gl/vsuCpZ
+ 1165  cd ~/w205/spark-with-kafka-and-hdfs
+ 1166  docker-compose up -d
+ 1167  docker-compose exec cloudera hadoop fs -ls /tmp/
+ 1168  docker-compose exec kafka kafka-topics --create --topic players --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1169  docker-compose exec mids bash -c "cat /w205/players.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t players"
+ 1170  docker-compose exec cloudera hadoop fs -ls /tmp/
+ 1171  docker-compose exec cloudera hadoop fs -ls /tmp/players/
+ 1172  docker-compose exec cloudera hadoop fs -ls /tmp/
+ 1173  docker-compose exec cloudera hadoop fs -ls /tmp/extracted_players/
+ 1174  docker-compose exec kafka kafka-topics --create --topic commits --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1175  cd ~/w205
+ 1176  curl -L -o github-example-large.json https://goo.gl/Y4MD58
+ 1177  cd ~/w205/spark-with-kafka-and-hdfs
+ 1178  docker-compose exec mids bash -c "cat /w205/github-example-large.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t commits"
+ 1179  docker-compose exec spark pyspark
+ 1180  docker-compose exec cloudera hadoop fs -ls /tmp/
+ 1181  docker-compose exec cloudera hadoop fs -ls /tmp/commits/
+ 1182  docker-compose exec cloudera hadoop fs -ls /tmp/some_commit_info/
+ 1183  quit
+ 1184  exit
+ 1185  cd ~/w205
+ 1186  cd ~/w205/spark-with-kafka 
+ 1187  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1188  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+ 1189  docker-compose exec kafka bash -c "seq 42 | kafka-console-producer --request-required-acks 1 --broker-list kafka:29092 --topic foo && echo 'Produced 42 messages.'"
+ 1190  cd ..
+ 1191  cd spark-with-kafka-and-hdfs
+ 1192  docker-compose exec spark pyspark
+ 1193  docker-compose down
+ 1194  exit
+ 1195  mkdir ~/w205/kafka
+ 1196  cd ~/w205/kafka
+ 1197  cp ~/w205/course-content/06-Transforming-Data/docker-compose.yml ~/w205/kafka/
+ 1198  docker-compose up -d
+ 1199  docker-compose ps
+ 1200  docker-compose logs zookeeper | grep -i binding
+ 1201  docker-compose logs kafka | grep -i started
+ 1202  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1203  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+ 1204  docker-compose exec kafka bash -c "seq 42 | kafka-console-producer --request-required-acks 1 --broker-list localhost:29092 --topic foo && echo 'Produced 42 messages.'"
+ 1205  docker-compose exec kafka kafka-console-consumer --bootstrap-server localhost:29092 --topic foo --from-beginning --max-messages 42
+ 1206  docker-compose down
+ 1207  curl -L -o github-example-large.json https://goo.gl/Y4MD58
+ 1208  docker-compose up -d
+ 1209  docker-compose logs -f kafka
+ 1210  exit
+ 1211  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1212  cd ~/w205 
+ 1213  cd kafka
+ 1214  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1215  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+ 1216  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json"
+ 1217  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t foo && echo 'Produced 100 messages.'"
+ 1218  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t foo -o beginning -e"
+ 1219  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t foo -o beginning -e" | wc -l
+ 1220  docker-compose down
+ 1221  cd ..
+ 1222  mkdir ~/w205/spark-with-kafka
+ 1223  cd ~/w205/spark-with-kafka
+ 1224  cp ~/w205/course-content/07-Sourcing-Data/docker-compose.yml .
+ 1225  docker-compose up -d
+ 1226  docker-compose logs -f kafka
+ 1227  exit
+ 1228  sudo chown -R jupyter:jupyter ~/w205
+ 1229  cd ~/w205/course-content
+ 1230  git pull --all
+ 1231  docker ps -a
+ 1232  docker rm -f 2160043890a5
+ 1233  docker rm -f d3e45c0b13cd
+ 1234  docker rm -f 9f69e934b8ef
+ 1235  docker rm -f 35fb37c5e6be
+ 1236  docker rm -f d5c9183471f3
+ 1237  docker ps -a
+ 1238  docker ps
+ 1239  WARNING: Connection pool is full, discarding connection: localhost
+ 1240  docker network ls
+ 1241  docker network prune
+ 1242  docker network ls
+ 1243  docker pull midsw205/base:latest
+ 1244  docker pull midsw205/base:0.1.8
+ 1245  docker pull midsw205/base:0.1.9
+ 1246  docker pull redis
+ 1247  docker pull confluentinc/cp-zookeeper:latest
+ 1248  docker pull confluentinc/cp-kafka:latest
+ 1249  docker pull midsw205/spark-python:0.0.5
+ 1250  docker pull midsw205/spark-python:0.0.6
+ 1251  docker pull midsw205/cdh-minimal:latest
+ 1252  docker pull midsw205/hadoop:0.0.2
+ 1253  docker pull midsw205/presto:0.0.1
+ 1254  cd ..
+ 1255  cd project-2-hgchoi
+ 1256  cd project-2-hgchoi
+ 1257  cd ~/w205
+ 1258  cd project-2-hgchoi
+ 1259  cd ~/w205
+ 1260  cd project-2-hgchoi
+ 1261  vi docker-compose.yml
+ 1262  docker-compose exec spark bash
+ 1263  docker-compose up -d
+ 1264  docker-compose exec spark bash
+ 1265  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+ 1266  docker-compose exec spark bash
+ 1267  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+ 1268  docker-compose exec spark bash
+ 1269  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+ 1270  exit
+ 1271  cd ~/w205
+ 1272  cd project-2-hgchoi
+ 1273  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+ 1274  assessment-attempts-20180128-121051-nested.json
+ 1275  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+ 1276  docker-compose up -d
+ 1277  docker-compose ps
+ 1278  docker ps -a
+ 1279  docker ps -a 
+ 1280  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1281  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+ 1282  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-201801280121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments && echo 'Produced 100 messages.'"
+ 1283  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+ 1284  docker-compose down
+ 1285  docker-compose up -d
+ 1286  docker-compose ps
+ 1287  docker ps -a 
+ 1288  docker ps -a
+ 1289  exit
+ 1290  docker-compose logs -f kafka
+ 1291  cd ~/w205
+ 1292  cd project-2-hgchoi
+ 1293  docker-compose logs -f kafka
+ 1294  exit
+ 1295  docker-compose exec spark bash
+ 1296  cd ~/w205
+ 1297  cd project-2-hgchoi
+ 1298  docker-compose exec spark bash
+ 1299  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+ 1300  exit
+ 1301  cd ~/w205
+ 1302  cd project-2-hgchoi
+ 1303  docker-compose up -d
+ 1304  exit
+ 1305  cd ~/w205
+ 1306  cd project-2-hgchoi
+ 1307  docker-compose logs -f kafka
+ 1308  sudo chown -R jupyter:jupyter ~/w205
+ 1309  cd ~/w205/course-content
+ 1310  git pull --all
+ 1311  docker ps -a
+ 1312  docker rm -f 07f33fba34ec
+ 1313  docker rm -f 6e7f58bc251c
+ 1314  docker rm -f 1f77dbd4e5f2
+ 1315  docker rm -f 67ac7e8b2854
+ 1316  docker rm -f 9dda3a4c83c9
+ 1317  docker ps -a 
+ 1318  docker network ls
+ 1319  docker network prune
+ 1320  docker pull midsw205/base:latest
+ 1321  docker pull midsw205/base:0.1.8
+ 1322  docker pull midsw205/base:0.1.9
+ 1323  docker pull redis
+ 1324  docker pull confluentinc/cp-zookeeper:latest
+ 1325  docker pull confluentinc/cp-kafka:latest
+ 1326  docker pull midsw205/spark-python:0.0.5
+ 1327  docker pull midsw205/spark-python:0.0.6
+ 1328  docker pull midsw205/cdh-minimal:latest
+ 1329  docker pull midsw205/hadoop:0.0.2
+ 1330  docker pull midsw205/presto:0.0.1
+ 1331  cd ..
+ 1332  cd project-2-hgchoi
+ 1333  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+ 1334  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+ 1335  vi docker-compose.yml
+ 1336  docker-compose up -d
+ 1337  vi docker-compose.yml
+ 1338  docker-compose down 
+ 1339  vi docker-compose.yml
+ 1340  docker-compose up -d
+ 1341  vi docker-compose.yml
+ 1342  docker-compose ps
+ 1343  docker ps -a 
+ 1344  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1345  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+ 1346  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-201801280121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments && echo 'Produced 100 messages.'"
+ 1347  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+ 1348  docker-compose exec spark bash
+ 1349  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+ 1350  docker-compose exec spark env PYSPARK_DRIVER_PYTHON
+ 1351  vi docker-compose.yml
+ 1352  docker compose down
+ 1353  docker-compose down
+ 1354  vi docker-compose.yml
+ 1355  docker-compose up -d
+ 1356  vi docker.compose.yml
+ 1357  vi docker-compose.yml
+ 1358  docker-compose exec spark bash
+ 1359  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+ 1360  vi docker-compose.yml
+ 1361  docker-compose exec spark bash
+ 1362  cd ~/w205
+ 1363  cd project-2-hgchoi
+ 1364  docker-compose exec spark pyspark
+ 1365  cd ~/w205
+ 1366  cd project-2-hgchoi
+ 1367  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+ 1368  git clone https://github.com/mids-w205-crook/project-2-hgchoi.git
+ 1369  cd ..
+ 1370  ls -l
+ 1371  cd project-2-hgchoi
+ 1372  git staus
+ 1373  git status
+ 1374  git branch assignment
+ 1375  git status
+ 1376  git checkout assignemnt
+ 1377  git checkout assignment
+ 1378  git status
+ 1379  ls -l
+ 1380  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+ 1381  ls -l
+ 1382  ls -lh
+ 1383  cp ~/w205/course-content/06-Transforming-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+ 1384  cp ~/w205/course-content/07-Sourcing-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+ 1385  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml ~/w205/project-2-hgchoi/
+ 1386  docker compose up -d 
+ 1387  docker-compose ps
+ 1388  docker compose ps -a
+ 1389  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1390  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+ 1391  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments && echo 'Produced 100 messages.'"
+ 1392  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+ 1393  docker-compose down
+ 1394  ls -l
+ 1395  docker-compose up -d
+ 1396  docker-compose ps
+ 1397  docker-compose ps -a
+ 1398  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+ 1399  docker-compose up -d
+ 1400  docker-compose ps
+ 1401  docker-compose ps -a
+ 1402  docker ps -a
+ 1403  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1404  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181 
+ 1405  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments"
+ 1406  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+ 1407  docker-compose up -d
+ 1408  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+ 1409  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+ 1410  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments && echo 'Produced 100 messages.'"
+ 1411  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+ 1412  ls -l
+ 1413  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+ 1414  docker-compose exec mids bash -c "cat /w205/project-2-hgchoi/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments && echo 'Produced 100 messages.'"
+ 1415  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+ 1416  cd ~/w205
+ 1417  cd project-2-hgchoi
+ 1418  vi docker-compose.yml
+ 1419  docker-compose exec spark bash
+ 1420  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+ 1421  cd ~/w205
+ 1422  cd project-2-hgchoi
+ 1423  docker-compose logs -f kafka
+ 1424  cd ~/w205 
+ 1425  cd project-2-hgchoi
+ 1426  history > <user-name>-history.txt
+ 1427  docker-compose exec spark cat /root/.python_history
+ 1428  docker-compose up -d
+ 1429  history > <hgchoi>-history.txt
+ 1430  docker-compose exec spark cat /root/.python_history
+ 1431  docker-compose exec spark pyspark
+ 1432  docker-compose exec spark
+ 1433  history > <user-name>-history.txt
+ 1434  history > <hgchoi>-history.txt
+ 1435  history > <project-2-hgchoi>-history.txt
+ 1436  history hgchoi-history.txt
+ 1437  history > hgchoi-history.txt
