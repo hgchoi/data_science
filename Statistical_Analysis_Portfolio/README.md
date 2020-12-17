@@ -18,7 +18,7 @@ Project Organization
     ├── Reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
     │   └── Figures        <- Generated graphics and figures to be used in reporting
     │
-    └── Src                <- Source code for use in this project.
+    └── src                <- Source code for use in this project.
         │
         └── Data           <- Scripts to download or generate data
            └── Make_dataset.R
