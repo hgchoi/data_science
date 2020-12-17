@@ -1,4 +1,4 @@
-An exploration of the features that cause increased or decreased state-level COVID cases. 
+An exploration of the features that affected increased or decreased state-level COVID cases. 
 
 Project Organization
 ------------
