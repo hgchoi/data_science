@@ -5,23 +5,23 @@ Project Organization
 
     ├── LICENSE
     ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
+    ├── Data
+    │   ├── External       <- Data from third party sources.
+    │   ├── Interim        <- Intermediate data that has been transformed.
+    │   ├── Processed      <- The final, canonical data sets for modeling.
+    │   └── Raw            <- The original, immutable data dump.
     |
-    ├── notebooks          <- .Rmd notebooks. 
+    ├── Notebooks          <- .Rmd notebooks. 
     │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+    ├── References         <- Data dictionaries, manuals, and all other explanatory materials.
     │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
+    ├── Reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
+    │   └── Figures        <- Generated graphics and figures to be used in reporting
     │
-    └── src                <- Source code for use in this project.
+    └── Src                <- Source code for use in this project.
         │
-        └── data           <- Scripts to download or generate data
-           └── make_dataset.R
+        └── Data           <- Scripts to download or generate data
+           └── Make_dataset.R
 
 
 --------
